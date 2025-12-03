@@ -8,7 +8,6 @@
     --font-title: 'Montserrat', sans-serif;
     --font-text: 'Lato', sans-serif;
 
-    /* Tipografia responsiva (clamp) */
     --title-size: clamp(1.6rem, 2.5vw + 1rem, 2.8rem);
     --section-title-size: clamp(1.75rem, 3.2vw + 1rem, 3.2rem);
     --base-font-size: clamp(0.95rem, 1.2vw + 0.6rem, 1.1rem);
@@ -18,7 +17,6 @@
 html { scroll-behavior: smooth; font-size: 16px; }
 body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--white); color: var(--text-color); line-height: 1.6; font-size: var(--base-font-size); }
 
-/* Skip link (accessibility): hidden off-screen but visible when focused */
 .skip-link {
     position: absolute;
     left: -9999px;
@@ -37,9 +35,8 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     top: 16px;
 }
 
-/* Seção 1: Banner Principal (ajustada: fundo azul da página, texto fora da imagem) */
 .hero-section {
-    background-color: var(--dark-blue); /* agora usa o azul principal da página */
+    background-color: var(--dark-blue);
     padding: 24px 16px;
 }
 
@@ -51,13 +48,13 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     justify-content: space-between;
     gap: 24px;
     padding: 28px;
-    flex-wrap: wrap; /* permitir que as colunas se quebrem mais naturalmente */
+    flex-wrap: wrap;
 }
 
 .hero-text {
     flex: 1 1 50%;
-    color: var(--white); /* texto fora da imagem em branco para contraste */
-    min-width: 260px; /* evita que o texto fique muito estreito */
+    color: var(--white);
+    min-width: 260px;
     padding-right: 18px;
 }
 
@@ -68,7 +65,6 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     margin-bottom: 10px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    /* Destaque maior e responsivo */
     font-size: clamp(1.15rem, 2.6vw + 0.2rem, 2rem);
 }
 
@@ -102,8 +98,8 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     flex: 0 0 45%;
     max-width: 48%;
     min-width: 260px;
-    aspect-ratio: 4 / 5; /* largura/altura aproximada */
-    overflow: hidden; /* evita que a imagem 'vaze' para fora do container */
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
 }
 
 .hero-image img {
@@ -115,16 +111,7 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     transition: transform 0.25s ease;
 }
 
-/*!* Melhor comportamento em telas médias *!*/
-/*@media (max-width: 1100px) {*/
-/*    .hero-inner { gap: 18px; padding: 22px; }*/
-/*    .hero-image { flex-basis: 48%; max-width: 48%; }*/
-/*    .hero-text h1 { font-size: clamp(1.35rem, 4vw, 2.4rem); }*/
-/*}*/
-
-/* Empilhar para mobile (ajustes finos) */
 @media (max-width: 860px) {
-    /* usar column e controlar order explicitamente para evitar comportamento inesperado */
     .hero-inner { flex-direction: column; padding: 18px; gap: 12px; }
     .hero-image { width: 100%; max-width: 100%; flex-basis: auto; order: 0; aspect-ratio: auto; }
     .hero-image img { height: auto; object-fit: contain; object-position: center; }
@@ -132,12 +119,9 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     .hero-text .kicker { font-size: clamp(1rem, 4vw, 1.6rem); }
     .hero-text h1 { font-size: clamp(1.25rem, 5vw, 1.9rem); }
     .hero-text p.lead { font-size: 0.98rem; }
-
-    /* Ajustar altura das imagens da seção de atuação para mobile */
     .atuacao-card img { height: auto; max-height: none; }
 }
 
-/* Mobile-friendly overrides to avoid hero cropping/jumping */
 @media (max-width: 1024px) {
     .hero-section {
         height: auto !important;
@@ -162,7 +146,6 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     .hero-image img { height: auto; object-fit: contain; object-position: center; }
 }
 
-/* Final mobile overrides — sobrescreve quaisquer regras anteriores que fixem altura do hero */
 @media (max-width: 1024px) {
     .hero-section { height: auto !important; min-height: 0 !important; }
 }
@@ -173,11 +156,9 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     .hero-section { height: auto !important; min-height: 0 !important; padding-top: 10px; padding-bottom: 10px; }
 }
 
-/* Ensure hero-image doesn't overflow and scales smoothly on small screens */
 .hero-image, .hero-image img { max-width: 100%; box-sizing: border-box; }
 .hero-image img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
 
-/* Imagens da seção de atuação: manter proporção e responsividade */
 .atuacao-card img {
     width: 180px;
     height: auto;
@@ -187,8 +168,6 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     border-radius: 5px;
 }
 
-
-/* SEÇÃO DO BOTÃO */
 .cta-banner-section {
     padding: 40px 20px;
     background-color: var(--dark-blue);
@@ -198,7 +177,6 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
 .cta-button { background-color: var(--copper); color: var(--white); padding: 14px 30px; border-radius: 6px; text-decoration: none; font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; transition: transform 0.25s ease, box-shadow 0.25s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12); display: inline-block; }
 .cta-button:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18); }
 
-/* Novos estilos para Avaliação 5 Estrelas (Abaixo do botão) */
 .client-rating {
     margin-top: 15px;
     text-align: center;
@@ -206,7 +184,7 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
 }
 
 .client-rating .stars {
-    color: #d4af37; /* Tom Cobre/Dourado mais vibrante */
+    color: #d4af37;
     font-size: 24px;
     letter-spacing: 3px;
     display: block;
@@ -214,16 +192,13 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
 
 .client-rating p {
     font-size: 14px;
-    color: var(--white); /* Texto branco para destacar no fundo azul escuro */
+    color: var(--white);
     margin-top: 5px;
     font-weight: 400;
 }
-/* Fim dos novos estilos */
 
-/* Seção 2: Áreas de Atuação */
 .atuacao-section { padding: 80px 20px; background-color: var(--white); text-align: center; }
 .section-title { font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: var(--section-title-size); color: var(--dark-blue); margin-bottom: 50px; font-weight: 800; }
-
 
 .atuacao-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto; }
 .atuacao-card { background-color: var(--white); border-radius: 8px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06); padding: 20px; flex: 1 1 240px; transition: transform 0.25s ease, box-shadow 0.25s ease; text-align: center; }
@@ -231,7 +206,6 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
 .atuacao-card img { width: 180px; height: auto; max-height: 180px; object-fit: cover; object-position: top; border-radius: 5px; margin-bottom: 20px; }
 .atuacao-card h3 { font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 1.2rem; color: var(--dark-blue); margin-bottom: 12px; }
 
-/* Seção 3: Conexão Humanizada */
 .conexao-section { padding: 80px 20px; background-color: var(--light-rose); }
 .conexao-container { display: flex; align-items: center; justify-content: center; gap: 40px; max-width: 1100px; margin: 0 auto; }
 .conexao-imagem { flex-basis: 40%; }
@@ -242,17 +216,14 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
 .cta-button-secondary { border: 2px solid var(--copper); color: var(--copper); background-color: transparent; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; transition: all 0.25s ease; display: inline-block; }
 .cta-button-secondary:hover { background-color: var(--copper); color: var(--white); transform: translateY(-4px); }
 
-/* Seção 4: Chamada Final */
 .contato-final-section { padding: 60px 20px; text-align: center; background-color: var(--light-gray); }
 .contato-final-section h2 { font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: var(--section-title-size); color: var(--dark-blue); margin-bottom: 18px; }
 .contato-final-section p { font-size: 1rem; max-width: 700px; margin: 0 auto 20px auto; color: #555; }
 
-/* Seção 5: Rodapé */
 .main-footer { background-color: var(--dark-blue); color: rgba(255, 255, 255, 0.9); padding: 30px 20px; text-align: center; }
 .main-footer h3 { font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: var(--white); margin-bottom: 8px; }
 .main-footer p { font-size: 0.95rem; margin-bottom: 6px; }
 
-/* Estilos para o Link do Instagram (No rodapé) */
 .social-link-area {
     margin: 16px 0 8px;
 }
@@ -260,10 +231,10 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
 .instagram-btn {
     display: inline-block;
     text-decoration: none;
-    color: #d4af37; /* Tom Cobre */
+    color: #d4af37;
     border: 1px solid #d4af37;
     padding: 8px 18px;
-    border-radius: 50px; /* Bordas arredondadas */
+    border-radius: 50px;
     font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 14px;
     font-weight: bold;
@@ -275,14 +246,12 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     color: var(--dark-blue);
     transform: translateY(-2px);
 }
-/* Fim dos novos estilos */
 
-/* Botão flutuante WhatsApp */
 .whatsapp-floating {
     position: fixed;
     right: 20px;
-    bottom: 20px; /* sempre no canto inferior direito */
-    background-color: #25D366; /* verde WhatsApp */
+    bottom: 20px;
+    background-color: #25D366;
     color: #ffffff;
     width: 58px;
     height: 58px;
@@ -301,7 +270,6 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* Prefer image icon from assets for more consistent appearance */
 .whatsapp-floating img.whatsapp-icon-img {
     width: 28px;
     height: 28px;
@@ -310,10 +278,8 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
 
 .whatsapp-icon { font-size: 22px; line-height: 1; }
 
-/* Ajuste para telas pequenas: mover o botão para o canto inferior direito */
 @media (max-width: 768px) {
     .whatsapp-floating {
-        /* em mobile mantemos no canto inferior, com tamanho levemente maior */
         right: 18px;
         bottom: 18px;
         width: 64px;
@@ -322,31 +288,25 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     .whatsapp-floating img.whatsapp-icon-img { width: 32px; height: 32px; }
 }
 
-/* Evitar sobreposição muito alta em rodapés menores */
 @media (max-height: 500px) {
      .whatsapp-floating { bottom: 12px; right: 12px; }
 }
 
-/* Responsividade para Tablets e Celulares */
 @media (max-width: 1024px) {
     .conexao-container { gap: 24px; }
     .conexao-imagem { flex-basis: 45%; }
     .conexao-texto { flex-basis: 55%; }
-    /* Centralizar foco do banner em tablets para evitar corte do texto embutido na imagem */
     .hero-section { height: 55vh; background-position: center 40%; }
 }
 
-/* Responsividade para Celulares */
 @media (max-width: 768px) {
     .section-title, .conexao-texto h2, .contato-final-section h2 { font-size: 1.8rem; }
 
     .hero-section {
-        /* Diminuir levemente a altura e centralizar o foco para manter texto visível */
-        height: 38vh; /* <<-- ALTURA AJUSTADA */
-        /* Em telas pequenas usamos contain para evitar cortar partes importantes da imagem (como texto embutido) */
+        height: 38vh;
         background-size: contain;
         background-repeat: no-repeat;
-        background-position: center top; /* texto tende a ficar na parte superior da arte */
+        background-position: center top;
     }
 
     .atuacao-container { flex-direction: column; gap: 20px; }
@@ -358,10 +318,127 @@ body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Robo
     .cta-button, .cta-button-secondary { padding: 12px 20px; font-size: 0.95rem; }
 }
 
-/* Pequenos ajustes para telas muito pequenas */
 @media (max-width: 420px) {
     :root { --section-title-size: 1.6rem; --title-size: 1.2rem; }
     .hero-section { height: 32vh; background-size: contain; background-position: center top; }
     .atuacao-card img { height: 200px; }
     .client-rating .stars { font-size: 20px; }
+}
+
+
+
+
+
+
+
+.premium-card-design {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: fit-content;  
+    margin-bottom: 30px;
+    position: relative;
+}
+
+
+.logo-wrapper {
+    position: relative;
+    z-index: 2;
+   
+    margin-bottom: -55px; 
+   
+    margin-left: -15px; 
+}
+
+.big-premium-logo {
+    width: 180px; 
+    height: auto;
+    display: block;
+    
+    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2));
+}
+
+
+.name-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    position: relative;
+    z-index: 1;
+    padding-top: 20px;
+}
+
+
+.premium-name {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--white);
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem); 
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1;
+    margin: 0;
+    padding-top: 15px;
+    white-space: nowrap; 
+    text-align: center;
+}
+
+
+.gap-for-p {
+    display: inline-block;
+    width: 15px; 
+}
+
+
+.separator-line {
+    width: 120%; 
+    height: 1px;
+   
+    background: linear-gradient(90deg, rgba(169, 117, 95, 0) 0%, var(--copper) 50%, rgba(169, 117, 95, 0) 100%);
+    margin: 10px 0;
+}
+
+
+.premium-role {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--copper);
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 10px; 
+    display: block;
+    text-align: center;
+    margin-left: 10px; 
+}
+
+
+@media (max-width: 768px) {
+    .premium-card-design {
+        width: 100%; 
+        align-items: center;
+    }
+
+    .logo-wrapper {
+        margin-bottom: -40px; 
+        margin-left: 0;
+    }
+
+    .big-premium-logo {
+        width: 140px;
+    }
+
+    .premium-name {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+
+    .separator-line {
+        width: 80%;
+    }
+    
+    .premium-role {
+        font-size: 0.9rem;
+        letter-spacing: 6px;
+    }
 }

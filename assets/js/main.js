@@ -1,10 +1,8 @@
-// IntersectionObserver to animate the section title when it enters the viewport
 (function () {
   'use strict';
 
-  // Respect user preference for reduced motion
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return; // don't animate if user prefers reduced motion
+  if (prefersReduced) return;
 
   function onIntersect(entries, observer) {
     entries.forEach(function (entry) {
@@ -29,4 +27,3 @@
   });
 
 })();
-
