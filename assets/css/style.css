@@ -1,6 +1,6 @@
 :root {
     --dark-blue: #2d3245; 
-    --copper: #a9755f;    
+    --copper: #a9755f;     
     --white: #ffffff;
     --light-gray: #f7f7f7;
     --light-rose: #f3e9e5; 
@@ -24,12 +24,34 @@ body { font-family: var(--font-text); background-color: var(--white); color: var
 /* SEÇÃO DO BOTÃO */
 .cta-banner-section {
     padding: 40px 20px;
-    background-color: var(--light-gray);
+    background-color: var(--dark-blue); /* Fundo mudado para azul escuro para dar contraste com as estrelas */
     text-align: center;
 }
 
 .cta-button { background-color: var(--copper); color: var(--white); padding: 18px 40px; border-radius: 5px; text-decoration: none; font-family: var(--font-title); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
 .cta-button:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); }
+
+/* Novos estilos para Avaliação 5 Estrelas (Abaixo do botão) */
+.client-rating {
+    margin-top: 15px;
+    text-align: center;
+    font-family: var(--font-title);
+}
+
+.client-rating .stars {
+    color: #d4af37; /* Tom Cobre/Dourado mais vibrante */
+    font-size: 24px;
+    letter-spacing: 3px;
+    display: block;
+}
+
+.client-rating p {
+    font-size: 14px;
+    color: var(--white); /* Texto branco para destacar no fundo azul escuro */
+    margin-top: 5px;
+    font-weight: 400;
+}
+/* Fim dos novos estilos */
 
 /* Seção 2: Áreas de Atuação */
 .atuacao-section { padding: 100px 20px; background-color: var(--white); text-align: center; }
@@ -60,6 +82,32 @@ body { font-family: var(--font-text); background-color: var(--white); color: var
 .main-footer { background-color: var(--dark-blue); color: rgba(255, 255, 255, 0.7); padding: 40px 20px; text-align: center; }
 .main-footer h3 { font-family: var(--font-title); color: var(--white); margin-bottom: 10px; }
 .main-footer p { font-size: 0.9rem; margin-bottom: 5px; }
+
+/* Estilos para o Link do Instagram (No rodapé) */
+.social-link-area {
+    margin: 20px 0 10px;
+}
+
+.instagram-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #d4af37; /* Tom Cobre */
+    border: 1px solid #d4af37;
+    padding: 10px 20px;
+    border-radius: 50px; /* Bordas arredondadas */
+    font-family: var(--font-title);
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.instagram-btn:hover {
+    background-color: #d4af37;
+    color: var(--dark-blue);
+    transform: translateY(-2px);
+}
+/* Fim dos novos estilos */
+
 
 /* Responsividade para Celulares */
 @media (max-width: 768px) {
