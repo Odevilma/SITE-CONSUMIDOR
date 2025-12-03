@@ -7,35 +7,202 @@
     --text-color: #333;
     --font-title: 'Montserrat', sans-serif;
     --font-text: 'Lato', sans-serif;
+
+    /* Tipografia responsiva (clamp) */
+    --title-size: clamp(1.6rem, 2.5vw + 1rem, 2.8rem);
+    --section-title-size: clamp(1.75rem, 3.2vw + 1rem, 3.2rem);
+    --base-font-size: clamp(0.95rem, 1.2vw + 0.6rem, 1.1rem);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-text); background-color: var(--white); color: var(--text-color); line-height: 1.6; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font-text), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--white); color: var(--text-color); line-height: 1.6; font-size: var(--base-font-size); }
 
-/* Seção 1: Banner Principal */
-.hero-section { 
-    background-image: url('../images/banner.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    height: 50vh;
+/* Skip link (accessibility): hidden off-screen but visible when focused */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    background: #fff;
+    color: var(--dark-blue);
+    padding: 10px 16px;
+    z-index: 10000;
+    border: 2px solid var(--dark-blue);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
 }
+.skip-link:focus {
+    left: 16px;
+    top: 16px;
+}
+
+/* Seção 1: Banner Principal (ajustada: fundo azul da página, texto fora da imagem) */
+.hero-section {
+    background-color: var(--dark-blue); /* agora usa o azul principal da página */
+    padding: 24px 16px;
+}
+
+.hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px;
+    flex-wrap: wrap; /* permitir que as colunas se quebrem mais naturalmente */
+}
+
+.hero-text {
+    flex: 1 1 50%;
+    color: var(--white); /* texto fora da imagem em branco para contraste */
+    min-width: 260px; /* evita que o texto fique muito estreito */
+    padding-right: 18px;
+}
+
+.hero-text .kicker {
+    display: block;
+    color: var(--copper);
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    /* Destaque maior e responsivo */
+    font-size: clamp(1.15rem, 2.6vw + 0.2rem, 2rem);
+}
+
+.hero-text h1 {
+    font-family: var(--font-title), sans-serif;
+    font-size: clamp(1.4rem, 3.5vw + 0.2rem, 2.8rem);
+    margin-bottom: 12px;
+    color: var(--white);
+    line-height: 1.08;
+}
+
+.hero-text p.lead {
+    font-size: clamp(0.98rem, 1.2vw + .3rem, 1.05rem);
+    color: rgba(255,255,255,0.92);
+    line-height: 1.45;
+    margin-bottom: 18px;
+}
+
+.hero-cta-inline {
+    display: inline-block;
+    background-color: var(--copper);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.hero-image {
+    position: relative;
+    flex: 0 0 45%;
+    max-width: 48%;
+    min-width: 260px;
+    aspect-ratio: 4 / 5; /* largura/altura aproximada */
+    overflow: hidden; /* evita que a imagem 'vaze' para fora do container */
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.25s ease;
+}
+
+/*!* Melhor comportamento em telas médias *!*/
+/*@media (max-width: 1100px) {*/
+/*    .hero-inner { gap: 18px; padding: 22px; }*/
+/*    .hero-image { flex-basis: 48%; max-width: 48%; }*/
+/*    .hero-text h1 { font-size: clamp(1.35rem, 4vw, 2.4rem); }*/
+/*}*/
+
+/* Empilhar para mobile (ajustes finos) */
+@media (max-width: 860px) {
+    /* usar column e controlar order explicitamente para evitar comportamento inesperado */
+    .hero-inner { flex-direction: column; padding: 18px; gap: 12px; }
+    .hero-image { width: 100%; max-width: 100%; flex-basis: auto; order: 0; aspect-ratio: auto; }
+    .hero-image img { height: auto; object-fit: contain; object-position: center; }
+    .hero-text { width: 100%; text-align: left; padding: 8px 6px; order: 1; }
+    .hero-text .kicker { font-size: clamp(1rem, 4vw, 1.6rem); }
+    .hero-text h1 { font-size: clamp(1.25rem, 5vw, 1.9rem); }
+    .hero-text p.lead { font-size: 0.98rem; }
+
+    /* Ajustar altura das imagens da seção de atuação para mobile */
+    .atuacao-card img { height: auto; max-height: none; }
+}
+
+/* Mobile-friendly overrides to avoid hero cropping/jumping */
+@media (max-width: 1024px) {
+    .hero-section {
+        height: auto !important;
+        min-height: auto !important;
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+    .hero-image { max-height: 56vh; }
+    .hero-image img { height: 100%; object-fit: contain; object-position: center; }
+}
+
+@media (max-width: 860px) {
+    .hero-section { height: auto !important; padding: 14px 12px; }
+    .hero-inner { gap: 12px; }
+    .hero-image { max-height: 50vh; }
+    .hero-image img { height: auto; object-fit: contain; object-position: center; }
+}
+
+@media (max-width: 420px) {
+    .hero-section { padding: 12px 10px; }
+    .hero-image { max-height: 42vh; }
+    .hero-image img { height: auto; object-fit: contain; object-position: center; }
+}
+
+/* Final mobile overrides — sobrescreve quaisquer regras anteriores que fixem altura do hero */
+@media (max-width: 1024px) {
+    .hero-section { height: auto !important; min-height: 0 !important; }
+}
+@media (max-width: 768px) {
+    .hero-section { height: auto !important; min-height: 0 !important; padding-top: 14px; padding-bottom: 14px; }
+}
+@media (max-width: 420px) {
+    .hero-section { height: auto !important; min-height: 0 !important; padding-top: 10px; padding-bottom: 10px; }
+}
+
+/* Ensure hero-image doesn't overflow and scales smoothly on small screens */
+.hero-image, .hero-image img { max-width: 100%; box-sizing: border-box; }
+.hero-image img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+
+/* Imagens da seção de atuação: manter proporção e responsividade */
+.atuacao-card img {
+    width: 180px;
+    height: auto;
+    max-height: 180px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+}
+
 
 /* SEÇÃO DO BOTÃO */
 .cta-banner-section {
     padding: 40px 20px;
-    background-color: var(--dark-blue); /* Fundo mudado para azul escuro para dar contraste com as estrelas */
+    background-color: var(--dark-blue);
     text-align: center;
 }
 
-.cta-button { background-color: var(--copper); color: var(--white); padding: 18px 40px; border-radius: 5px; text-decoration: none; font-family: var(--font-title); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
-.cta-button:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); }
+.cta-button { background-color: var(--copper); color: var(--white); padding: 14px 30px; border-radius: 6px; text-decoration: none; font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; transition: transform 0.25s ease, box-shadow 0.25s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12); display: inline-block; }
+.cta-button:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18); }
 
 /* Novos estilos para Avaliação 5 Estrelas (Abaixo do botão) */
 .client-rating {
     margin-top: 15px;
     text-align: center;
-    font-family: var(--font-title);
+    font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .client-rating .stars {
@@ -54,38 +221,40 @@ body { font-family: var(--font-text); background-color: var(--white); color: var
 /* Fim dos novos estilos */
 
 /* Seção 2: Áreas de Atuação */
-.atuacao-section { padding: 100px 20px; background-color: var(--white); text-align: center; }
-.section-title { font-family: var(--font-title); font-size: 2.8rem; color: var(--dark-blue); margin-bottom: 70px; font-weight: 800; }
-.atuacao-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto; }
-.atuacao-card { background-color: var(--white); border-radius: 8px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); padding: 30px; flex-basis: 250px; flex-grow: 1; transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; }
-.atuacao-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); }
-.atuacao-card img { width: 100%; height: 180px; object-fit: cover; object-position: top; border-radius: 5px; margin-bottom: 25px; }
-.atuacao-card h3 { font-family: var(--font-title); font-size: 1.4rem; color: var(--dark-blue); margin-bottom: 15px; }
+.atuacao-section { padding: 80px 20px; background-color: var(--white); text-align: center; }
+.section-title { font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: var(--section-title-size); color: var(--dark-blue); margin-bottom: 50px; font-weight: 800; }
+
+
+.atuacao-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto; }
+.atuacao-card { background-color: var(--white); border-radius: 8px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06); padding: 20px; flex: 1 1 240px; transition: transform 0.25s ease, box-shadow 0.25s ease; text-align: center; }
+.atuacao-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+.atuacao-card img { width: 180px; height: auto; max-height: 180px; object-fit: cover; object-position: top; border-radius: 5px; margin-bottom: 20px; }
+.atuacao-card h3 { font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 1.2rem; color: var(--dark-blue); margin-bottom: 12px; }
 
 /* Seção 3: Conexão Humanizada */
-.conexao-section { padding: 100px 20px; background-color: var(--light-rose); }
-.conexao-container { display: flex; align-items: center; justify-content: center; gap: 60px; max-width: 1100px; margin: 0 auto; }
+.conexao-section { padding: 80px 20px; background-color: var(--light-rose); }
+.conexao-container { display: flex; align-items: center; justify-content: center; gap: 40px; max-width: 1100px; margin: 0 auto; }
 .conexao-imagem { flex-basis: 40%; }
-.conexao-imagem img { width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+.conexao-imagem img { width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); display: block; }
 .conexao-texto { flex-basis: 60%; }
-.conexao-texto h2 { font-family: var(--font-title); font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 25px; line-height: 1.3; }
-.conexao-texto p { font-size: 1.1rem; margin-bottom: 40px; }
-.cta-button-secondary { border: 2px solid var(--copper); color: var(--copper); background-color: transparent; padding: 18px 40px; border-radius: 5px; text-decoration: none; font-family: var(--font-title); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; transition: all 0.3s ease; display: inline-block; }
-.cta-button-secondary:hover { background-color: var(--copper); color: var(--white); transform: translateY(-5px); }
+.conexao-texto h2 { font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: var(--title-size); color: var(--dark-blue); margin-bottom: 18px; line-height: 1.25; }
+.conexao-texto p { font-size: 1rem; margin-bottom: 28px; color: #333; }
+.cta-button-secondary { border: 2px solid var(--copper); color: var(--copper); background-color: transparent; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; transition: all 0.25s ease; display: inline-block; }
+.cta-button-secondary:hover { background-color: var(--copper); color: var(--white); transform: translateY(-4px); }
 
 /* Seção 4: Chamada Final */
-.contato-final-section { padding: 100px 20px; text-align: center; background-color: var(--light-gray); }
-.contato-final-section h2 { font-family: var(--font-title); font-size: 2.8rem; color: var(--dark-blue); margin-bottom: 25px; }
-.contato-final-section p { font-size: 1.1rem; max-width: 650px; margin: 0 auto 40px auto; color: #555; }
+.contato-final-section { padding: 60px 20px; text-align: center; background-color: var(--light-gray); }
+.contato-final-section h2 { font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: var(--section-title-size); color: var(--dark-blue); margin-bottom: 18px; }
+.contato-final-section p { font-size: 1rem; max-width: 700px; margin: 0 auto 20px auto; color: #555; }
 
 /* Seção 5: Rodapé */
-.main-footer { background-color: var(--dark-blue); color: rgba(255, 255, 255, 0.7); padding: 40px 20px; text-align: center; }
-.main-footer h3 { font-family: var(--font-title); color: var(--white); margin-bottom: 10px; }
-.main-footer p { font-size: 0.9rem; margin-bottom: 5px; }
+.main-footer { background-color: var(--dark-blue); color: rgba(255, 255, 255, 0.9); padding: 30px 20px; text-align: center; }
+.main-footer h3 { font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: var(--white); margin-bottom: 8px; }
+.main-footer p { font-size: 0.95rem; margin-bottom: 6px; }
 
 /* Estilos para o Link do Instagram (No rodapé) */
 .social-link-area {
-    margin: 20px 0 10px;
+    margin: 16px 0 8px;
 }
 
 .instagram-btn {
@@ -93,12 +262,12 @@ body { font-family: var(--font-text); background-color: var(--white); color: var
     text-decoration: none;
     color: #d4af37; /* Tom Cobre */
     border: 1px solid #d4af37;
-    padding: 10px 20px;
+    padding: 8px 18px;
     border-radius: 50px; /* Bordas arredondadas */
-    font-family: var(--font-title);
+    font-family: var(--font-title), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 14px;
     font-weight: bold;
-    transition: 0.3s;
+    transition: 0.25s;
 }
 
 .instagram-btn:hover {
@@ -108,17 +277,91 @@ body { font-family: var(--font-text); background-color: var(--white); color: var
 }
 /* Fim dos novos estilos */
 
+/* Botão flutuante WhatsApp */
+.whatsapp-floating {
+    position: fixed;
+    right: 20px;
+    bottom: 20px; /* sempre no canto inferior direito */
+    background-color: #25D366; /* verde WhatsApp */
+    color: #ffffff;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.whatsapp-floating:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Prefer image icon from assets for more consistent appearance */
+.whatsapp-floating img.whatsapp-icon-img {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+.whatsapp-icon { font-size: 22px; line-height: 1; }
+
+/* Ajuste para telas pequenas: mover o botão para o canto inferior direito */
+@media (max-width: 768px) {
+    .whatsapp-floating {
+        /* em mobile mantemos no canto inferior, com tamanho levemente maior */
+        right: 18px;
+        bottom: 18px;
+        width: 64px;
+        height: 64px;
+    }
+    .whatsapp-floating img.whatsapp-icon-img { width: 32px; height: 32px; }
+}
+
+/* Evitar sobreposição muito alta em rodapés menores */
+@media (max-height: 500px) {
+     .whatsapp-floating { bottom: 12px; right: 12px; }
+}
+
+/* Responsividade para Tablets e Celulares */
+@media (max-width: 1024px) {
+    .conexao-container { gap: 24px; }
+    .conexao-imagem { flex-basis: 45%; }
+    .conexao-texto { flex-basis: 55%; }
+    /* Centralizar foco do banner em tablets para evitar corte do texto embutido na imagem */
+    .hero-section { height: 55vh; background-position: center 40%; }
+}
 
 /* Responsividade para Celulares */
 @media (max-width: 768px) {
-    .section-title, .conexao-texto h2, .contato-final-section h2 { font-size: 2rem; }
-    
+    .section-title, .conexao-texto h2, .contato-final-section h2 { font-size: 1.8rem; }
+
     .hero-section {
-        height: 50vh; /* <<-- ALTURA AJUSTADA */
-        background-position: right center; /* <<-- FOCO AJUSTADO PARA A DIREITA */
+        /* Diminuir levemente a altura e centralizar o foco para manter texto visível */
+        height: 38vh; /* <<-- ALTURA AJUSTADA */
+        /* Em telas pequenas usamos contain para evitar cortar partes importantes da imagem (como texto embutido) */
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center top; /* texto tende a ficar na parte superior da arte */
     }
 
-    .atuacao-container { flex-direction: column; gap: 30px; }
+    .atuacao-container { flex-direction: column; gap: 20px; }
     .atuacao-card { flex-basis: auto; }
     .conexao-container { flex-direction: column; text-align: center; }
+    .conexao-imagem, .conexao-texto { width: 100%; }
+    .conexao-texto p { margin: 0 auto 20px auto; }
+
+    .cta-button, .cta-button-secondary { padding: 12px 20px; font-size: 0.95rem; }
+}
+
+/* Pequenos ajustes para telas muito pequenas */
+@media (max-width: 420px) {
+    :root { --section-title-size: 1.6rem; --title-size: 1.2rem; }
+    .hero-section { height: 32vh; background-size: contain; background-position: center top; }
+    .atuacao-card img { height: 200px; }
+    .client-rating .stars { font-size: 20px; }
 }
