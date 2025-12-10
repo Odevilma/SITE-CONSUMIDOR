@@ -25,5 +25,4 @@
 
     observer.observe(target);
   });
-
 })();
